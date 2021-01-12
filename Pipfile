@@ -1,0 +1,20 @@
+[[source]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+autopep8 = "*"
+pylink = "*"
+pytest = "*"
+mypy = "*"
+flake8 = "*"
+isort = "*"
+pytest-cov = "*"
+pre-commit = "*"
+black = "*"
+
+[requires]
+python_version = "3.8"
