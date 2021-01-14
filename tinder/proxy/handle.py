@@ -13,14 +13,15 @@ class ProxyManger():
     # def recode():
 
     def mock(self):
-        if self.flow.request.host.endswith("thor.weidian.com"):
-            self.flow.request.scheme = "http"
-            self.flow.request.port = 80
-            # self.flow.request.host = "houtu.vdian.net"
-            # self.flow.request.path = "/thorRemote" + self.flow.request.path
-            # self.flow.request.headers["Host"] = "houtu.vdian.net"
-            self.flow.request.host = "thor.daily.weidian.com"
-            self.flow.request.headers["Host"] = "thor.daily.weidian.com"
+        pass
+        # if self.flow.request.host.endswith("thor.weidian.com"):
+        #     self.flow.request.scheme = "http"
+        #     self.flow.request.port = 80
+        #     # self.flow.request.host = "houtu.vdian.net"
+        #     # self.flow.request.path = "/thorRemote" + self.flow.request.path
+        #     # self.flow.request.headers["Host"] = "houtu.vdian.net"
+        #     self.flow.request.host = "thor.daily.weidian.com"
+        #     self.flow.request.headers["Host"] = "thor.daily.weidian.com"
 
     def serialize(self, target):
         data = {}

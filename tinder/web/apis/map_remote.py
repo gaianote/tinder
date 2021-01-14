@@ -23,14 +23,15 @@ class MapRemote(Resource):
         return {"status": 0}
 
     def put(self):
+        print(request.data)
         map_from = json.loads(request.data)["map_from"]
         map_to = json.loads(request.data)["map_to"]
-        rid = json.loads(request.data)["id"]
+        rid = json.loads(request.data)["rid"]
         enable = json.loads(request.data)["enable"]
         MapRemoteController.update_rule(rid, map_from, map_to, enable)
         return {"status": 0}
 
     def delete(self):
-        rid = json.loads(request.data)["id"]
+        rid = json.loads(request.data)["rid"]
         MapRemoteController.delete_rule(rid)
         return {"status": 0}

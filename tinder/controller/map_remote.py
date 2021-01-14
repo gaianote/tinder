@@ -1,8 +1,7 @@
 import json
 from contextlib import contextmanager
-
-# from tinder import application
-# from tinder.db.database_server import MapRemoteConifgTable
+from tinder.database.server import db, MapRemoteConifgTable
+import uuid
 
 
 @contextmanager
@@ -41,44 +40,44 @@ class MapRemoteController:
         """
         获得所有配置
         """
-        db = application.server["db"]
+        # db = application.server["db"]
         result = db.session.query(MapRemoteConifgTable).all()
         return serialize(result)
 
     @staticmethod
-    def add_rule(map_from: str, map_to: str, enable: int):
+    def add_rule(map_from: str, map_to: str, enable: bool):
         """
         增加配置
         """
-        db = application.server["db"]
+        # db = application.server["db"]
+        rid = str(uuid.uuid1())
         with session_maker(db.session) as session:
             session.add(
-                MapRemoteConifgTable(map_from=map_from, map_to=map_to, enable=enable)
+                MapRemoteConifgTable(
+                    map_from=map_from, map_to=map_to, enable=enable, rid=rid)
             )
         return {"status": 0}
 
     @staticmethod
-    def delete_rule(rid: int):
+    def delete_rule(rid: str):
         """
         删除配置
         """
-        db = application.server["db"]
         with session_maker(db.session) as session:
             session.query(MapRemoteConifgTable).filter(
-                MapRemoteConifgTable.id == rid
+                MapRemoteConifgTable.rid == rid
             ).delete()
         return {"status": 0}
 
     @staticmethod
-    def update_rule(rid: int, map_from: str, map_to: str, enable: int):
+    def update_rule(rid: str, map_from: str, map_to: str, enable: bool):
         """
         更新配置
         """
-        db = application.server["db"]
         with session_maker(db.session) as session:
             rule = (
                 session.query(MapRemoteConifgTable)
-                .filter(MapRemoteConifgTable.id == rid)
+                .filter(MapRemoteConifgTable.rid == rid)
                 .one()
             )
             rule.map_from = map_from

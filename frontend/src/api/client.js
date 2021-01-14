@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+export const getClientProxy = () => {
+  return axios({
+      url: '/api/config/client/proxy',
+  })
+}
 
 export const closeClientProxy = () => {
   return axios({

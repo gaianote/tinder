@@ -9,6 +9,11 @@ class ClientProxy(Resource):
     本地 打开/关闭 代理功能
     """
 
+    def get(self):
+        manager = ClientProxyManager()
+        result = manager.isOpen()
+        return {"status": 0, "result": result}
+
     def put(self):
         status = request.json["status"]
         manager = ClientProxyManager()

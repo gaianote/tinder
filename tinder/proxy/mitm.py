@@ -35,3 +35,24 @@ def response(flow: http.HTTPFlow):
     #         }
     #     }''')
     # print(_catch.items()[-1])
+    if flow.request.url.find("user.getRegisterInfo") != -1:
+
+        flow.response.set_text('''{
+                "status": {
+                    "code": 0,
+                    "message": "OK",
+                    "description": ""
+                },
+                "result": {
+                    "companyCode": "91330104MA27WYQ77B",
+                    "companyCodeType": 1,
+                    "companyName": "杭州基育科技有限公司",
+                    "id": 1029,
+                    "mobile": "13148474587",
+                    "reason": "",
+                    "status": 5,
+                    "userName": "钱俊杰",
+                    "wechatId": "qianjunjie-liuxue",
+                    "showNick":true
+                }
+            }''')

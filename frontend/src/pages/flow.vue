@@ -22,14 +22,7 @@
         inactive-color="#ff4949"
       >
       </el-switch>
-      <el-switch
-        size="mini"
-        active-text="Map"
-        v-model="clientProxyStatus"
-        active-color="#13ce66"
-        inactive-color="#ff4949"
-      >
-      </el-switch>
+      <MapRemote />
     </el-row>
     <el-table size="mini" :data="tableData" style="width: 100%">
       <el-table-column type="selection" width="55"> </el-table-column>
@@ -69,17 +62,20 @@
 
 <script>
 import Code from "@/components/Code";
+import MapRemote from "@/pages/mapRemote";
 // import getFlowList from "@/api/flow";
 import * as api from "@/api";
 
 export default {
   components: {
     Code,
+    MapRemote,
   },
   data() {
     return {
       clientProxyStatus: false,
       tableData: [],
+      dialogTableVisible: false,
     };
   },
   methods: {
@@ -103,6 +99,10 @@ export default {
   async mounted() {
     let res = await api.getFlowList(1, 20);
     this.tableData = res.data.result;
+    let proxyRes = await api.getClientProxy();
+    if (proxyRes.data.result == true) {
+      this.clientProxyStatus = true;
+    }
   },
 };
 </script>

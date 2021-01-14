@@ -6,6 +6,18 @@ class ClientProxyManager(object):
     设置本机代理
     """
 
+    def isOpen(self):
+        """
+        是否打开
+        """
+        cmd = "networksetup -getwebproxy Wi-Fi"
+        result = os.popen(cmd).read()
+        print(result)
+        if result.find("Yes") != -1:
+            return True
+        else:
+            return False
+
     def set(self):
         """
         设置代理
