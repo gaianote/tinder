@@ -2,9 +2,6 @@
   <div>
     <el-row>
       <el-button size="mini">默认按钮</el-button>
-      <el-button size="mini" @click="deleteAllFlow">clear</el-button>
-      <el-button size="mini">delete</el-button>
-
       <el-switch
         size="mini"
         active-text="代理本机"
@@ -25,17 +22,20 @@
       <MapRemote />
     </el-row>
     <el-table size="mini" :data="tableData" style="width: 100%">
-      <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column prop="method" label="method" width="80">
+      <el-table-column width="70" label="Enable">
+        <template slot-scope="scope">
+          <el-checkbox
+            v-model="scope.row.enable"
+            @change="upDateMockRule(scope.row)"
+          ></el-checkbox>
+        </template>
       </el-table-column>
-      <el-table-column prop="status" label="status" width="80">
+      <el-table-column prop="rule" label="rule" width="500"> </el-table-column>
+      <el-table-column prop="describe" label="describe" width="300">
       </el-table-column>
-      <el-table-column prop="url" label="url" width="500"> </el-table-column>
-      <el-table-column prop="start" label="start" width="180">
+      <el-table-column prop="group_name" label="group_name" width="100">
       </el-table-column>
-      <el-table-column prop="duration" label="duration" width="100">
-      </el-table-column>
-      <el-table-column prop="size" label="size" width="100"> </el-table-column>
+
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-row :gutter="20">
@@ -118,6 +118,12 @@ export default {
     };
   },
   methods: {
+    async upDateMockRule(row) {
+      await api.updateMockRule({
+        rid: row.rid,
+        enable: row.enable,
+      });
+    },
     async deleteAllFlow() {
       await api.deleteAllFlow();
       this.tableData = [];
@@ -152,7 +158,7 @@ export default {
     },
   },
   async mounted() {
-    let res = await api.getFlowList(1, 20);
+    let res = await api.getMockRules();
     this.tableData = res.data.result;
     let proxyRes = await api.getClientProxy();
     if (proxyRes.data.result == true) {

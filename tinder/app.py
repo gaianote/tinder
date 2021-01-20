@@ -7,7 +7,6 @@ def main():
     proxyserver = ProxyServer()
     webserver.start()
     proxyserver.start()
-    print("hello world!")
 
 
 if __name__ == "__main__":

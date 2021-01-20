@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <flow />
+    <router-view></router-view>
+    <!-- <flow /> -->
   </div>
 </template>
 
 <script>
-import flow from "./pages/flow.vue";
+// import flow from "./pages/flow.vue";
 export default {
   name: "App",
-  components: {
-    flow,
-  },
+  // components: {
+  //   flow,
+  // },
 };
 </script>
 
